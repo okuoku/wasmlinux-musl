@@ -1,0 +1,12 @@
+#define _REDIR_TIME64 1
+#define _Addr int
+#define _Int64 long long
+#define _Reg int
+
+#define __BYTE_ORDER 1234
+#define __LONG_MAX 0x7fffffffL
+
+TYPEDEF unsigned wchar_t;
+TYPEDEF float float_t;
+TYPEDEF double double_t;
+TYPEDEF struct { alignas(8) long long __ll; long double __ld; } max_align_t;
