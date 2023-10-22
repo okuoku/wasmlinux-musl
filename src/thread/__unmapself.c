@@ -16,9 +16,11 @@ static void do_unmap()
 
 void __unmapself(void *base, size_t size)
 {
+#ifndef __wasm__
 	char *stack = shared_stack + sizeof shared_stack;
 	stack -= (uintptr_t)stack % 16;
 	unmap_base = base;
 	unmap_size = size;
 	CRTJMP(do_unmap, stack);
+#endif
 }
