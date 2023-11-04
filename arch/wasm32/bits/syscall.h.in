@@ -105,7 +105,6 @@
 #define __NR_timer_getoverrun 109
 #define __NR_timer_settime 110
 #define __NR_timer_delete 111
-#define __NR_clock_nanosleep 115
 #define __NR_syslog 116
 #define __NR_ptrace 117
 #define __NR_sched_setparam 118
