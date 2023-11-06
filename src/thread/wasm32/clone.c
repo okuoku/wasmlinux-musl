@@ -22,7 +22,8 @@ __clone(int (*func)(void *), void *stack, int flags, void *arg, ...){
         ptid = va_arg(ap, pid_t *);
     }
 
-    if (flags & CLONE_CHILD_SETTID) {
+    /* FIXME: Are we sure? */
+    if (flags & (CLONE_CHILD_SETTID|CLONE_CHILD_CLEARTID)) {
         tls = va_arg(ap, void *);
         ctid = va_arg(ap, pid_t *);
     }
