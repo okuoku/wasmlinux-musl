@@ -162,7 +162,12 @@ unsigned ualarm(unsigned, unsigned);
 #define L_XTND 2
 int brk(void *);
 void *sbrk(intptr_t);
+#ifndef __wasm__
 pid_t vfork(void);
+#else
+pid_t __attribute__((import_module("wasmlinux_hooks"), import_name("vfork"))) 
+    vfork(void);
+#endif
 int vhangup(void);
 int chroot(const char *);
 int getpagesize(void);
