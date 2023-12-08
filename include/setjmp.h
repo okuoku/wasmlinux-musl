@@ -25,18 +25,45 @@ typedef struct __jmp_buf_tag {
  || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) \
  || defined(_BSD_SOURCE)
 typedef jmp_buf sigjmp_buf;
+#ifndef __wasm__
 int sigsetjmp (sigjmp_buf, int) __setjmp_attr;
 _Noreturn void siglongjmp (sigjmp_buf, int);
+#else
+int 
+__attribute__((import_module("wasmlinux_hooks"), import_name("sigsetjmp")))
+sigsetjmp (sigjmp_buf, int) __setjmp_attr;
+_Noreturn void
+__attribute__((import_module("wasmlinux_hooks"), import_name("siglongjmp")))
+siglongjmp (sigjmp_buf, int);
+#endif
 #endif
 
 #if defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) \
  || defined(_BSD_SOURCE)
+#ifndef __wasm__
 int _setjmp (jmp_buf) __setjmp_attr;
 _Noreturn void _longjmp (jmp_buf, int);
+#else
+int 
+__attribute__((import_module("wasmlinux_hooks"), import_name("_setjmp")))
+_setjmp (jmp_buf) __setjmp_attr;
+_Noreturn void
+__attribute__((import_module("wasmlinux_hooks"), import_name("_longjmp")))
+_longjmp (jmp_buf, int);
+#endif
 #endif
 
+#ifndef __wasm__
 int setjmp (jmp_buf) __setjmp_attr;
 _Noreturn void longjmp (jmp_buf, int);
+#else
+int 
+__attribute__((import_module("wasmlinux_hooks"), import_name("setjmp")))
+setjmp (jmp_buf) __setjmp_attr;
+_Noreturn void
+__attribute__((import_module("wasmlinux_hooks"), import_name("longjmp")))
+longjmp (jmp_buf, int);
+#endif
 
 #define setjmp setjmp
 
